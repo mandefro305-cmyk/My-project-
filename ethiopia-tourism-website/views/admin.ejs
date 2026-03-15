@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Visit Ethiopia</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .admin-container {
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 2rem;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: .5rem;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: .5rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .btn {
+            padding: 10px 15px;
+            background-color: #004d40;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .btn-danger {
+            background-color: #d32f2f;
+        }
+        .header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <div class="header-flex">
+            <h2>Admin Dashboard</h2>
+            <a href="/logout" class="btn btn-danger">Logout</a>
+        </div>
+        <hr>
+
+        <h3>Manage Tourist Places</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Image URL</th>
+                    <th>Video URL</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% places.forEach(place => { %>
+                <tr>
+                    <td><%= place.id %></td>
+                    <td><%= place.name %></td>
+                    <td><%= place.description %></td>
+                    <td><%= place.image_url %></td>
+                    <td><%= place.video_url %></td>
+                    <td>
+                        <form action="/admin/delete/<%= place.id %>" method="POST" style="display:inline;">
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+
+        <h3>Add New Place</h3>
+        <form action="/admin/add" method="POST">
+            <div class="form-group">
+                <label>Name:</label>
+                <input type="text" name="name" required>
+            </div>
+            <div class="form-group">
+                <label>Description:</label>
+                <textarea name="description" rows="3" required></textarea>
+            </div>
+            <div class="form-group">
+                <label>Image URL:</label>
+                <input type="text" name="image_url" placeholder="e.g., lalibela.jpg">
+            </div>
+            <div class="form-group">
+                <label>Video URL:</label>
+                <input type="url" name="video_url" placeholder="e.g., YouTube embed URL">
+            </div>
+            <button type="submit" class="btn">Add Place</button>
+        </form>
+
+    </div>
+</body>
+</html>
