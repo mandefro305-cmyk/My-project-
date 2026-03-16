@@ -6,10 +6,33 @@ const path = require('path');
 const app = express();
 const port = 3000;
 
-// Connect to SQLite DB
+// Connect to SQLite DB and initialize tables if they don't exist
 const db = new sqlite3.Database('./tourism.db', (err) => {
-    if (err) console.error(err.message);
-    else console.log('Connected to the tourism SQLite database.');
+    if (err) {
+        console.error(err.message);
+    } else {
+        console.log('Connected to the tourism SQLite database.');
+        db.serialize(() => {
+            db.run(`CREATE TABLE IF NOT EXISTS users (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                username TEXT UNIQUE NOT NULL,
+                password TEXT NOT NULL
+            )`);
+            db.run(`CREATE TABLE IF NOT EXISTS places (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT NOT NULL,
+                description TEXT,
+                image_url TEXT,
+                video_url TEXT
+            )`);
+            // Insert default admin if none exists
+            db.get("SELECT * FROM users WHERE username = 'admin'", (err, row) => {
+                if (!row) {
+                    db.run("INSERT INTO users (username, password) VALUES ('admin', '$2b$10$wTf7tPOnv81wZ0j4x9xT1ObM19PZ43177Q82q81kH2n178N29gZl.')");
+                }
+            });
+        });
+    }
 });
 
 // Middleware
@@ -19,9 +42,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(session({
-    secret: 'secret-key-for-tourism-app',
+    secret: process.env.SESSION_SECRET || 'dev-secret-key',
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: true,
+    cookie: { secure: process.env.NODE_ENV === 'production' }
 }));
 
 // Auth Middleware

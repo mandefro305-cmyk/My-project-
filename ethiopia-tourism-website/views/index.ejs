@@ -9,31 +9,34 @@
 <body>
 
 <header>
-<h1 data-en="Visit Ethiopia" data-am="ኢትዮጵያን ጎብኙ">Visit Ethiopia</h1>
+<div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; width: 100%;">
+    <h1 data-en="Visit Ethiopia" data-am="ኢትዮጵያን ጎብኙ">Visit Ethiopia</h1>
 
-<nav>
-<a href="/">Home</a>
-<a href="/destinations">Destinations</a>
-<a href="/culture">Culture</a>
-<a href="/guide">Travel Guide</a>
-<a href="/gallery">Gallery</a>
-<a href="/blog">Blog</a>
-<a href="/contact">Contact</a>
-</nav>
+    <nav>
+    <a href="/">Home</a>
+    <a href="/destinations">Destinations</a>
+    <a href="/culture">Culture</a>
+    <a href="/guide">Travel Guide</a>
+    <a href="/gallery">Gallery</a>
+    <a href="/blog">Blog</a>
+    <a href="/contact">Contact</a>
+    </nav>
 
-<select id="language" onchange="changeLanguage()">
-<option value="en">English</option>
-<option value="am">አማርኛ</option>
-</select>
-
+    <select id="language" onchange="changeLanguage()">
+    <option value="en">English</option>
+    <option value="am">አማርኛ</option>
+    </select>
+</div>
 </header>
 
 <section class="hero">
-<h2 data-en="Discover the Beauty of Ethiopia" data-am="የኢትዮጵያን ውበት ያግኙ">Discover the Beauty of Ethiopia</h2>
-<p data-en="Explore history, mountains and culture." data-am="ታሪክ፣ ተራሮች እና ባህልን ያስሱ">Explore history, mountains and culture.</p>
+<div class="container">
+    <h2 data-en="Discover the Beauty of Ethiopia" data-am="የኢትዮጵያን ውበት ያግኙ">Discover the Beauty of Ethiopia</h2>
+    <p data-en="Explore history, mountains and culture." data-am="ታሪክ፣ ተራሮች እና ባህልን ያስሱ">Explore history, mountains and culture.</p>
+</div>
 </section>
 
-<section class="places-grid">
+<section class="places-grid container">
 <h2 data-en="Top Destinations" data-am="ከፍተኛ መዳረሻዎች">Top Destinations</h2>
 <div class="grid-container">
     <% if(locals.places && places.length > 0) { %>
