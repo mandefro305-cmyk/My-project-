@@ -182,6 +182,107 @@ footer {
   margin-top: 40px;
 }
 
+/* AI Chatbot Styles */
+#ai-chat-widget {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 320px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 1000;
+  transition: height 0.3s ease;
+}
+
+.ai-chat-collapsed { height: 50px; }
+.ai-chat-expanded { height: 400px; }
+
+.ai-chat-header {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+  color: white;
+  padding: 12px 15px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  user-select: none;
+}
+
+.ai-chat-body {
+  flex-grow: 1;
+  padding: 15px;
+  overflow-y: auto;
+  background: #f8faf9;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ai-chat-collapsed .ai-chat-body,
+.ai-chat-collapsed .ai-chat-footer {
+  display: none;
+}
+
+.chat-message {
+  max-width: 85%;
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+
+.bot-message {
+  background: white;
+  color: var(--text-dark);
+  align-self: flex-start;
+  border: 1px solid var(--border-color);
+  border-bottom-left-radius: 4px;
+}
+
+.user-message {
+  background: var(--primary-color);
+  color: white;
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+}
+
+.ai-chat-footer {
+  padding: 10px;
+  background: white;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  gap: 8px;
+}
+
+.ai-chat-footer input {
+  flex-grow: 1;
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  outline: none;
+  font-family: inherit;
+}
+
+.ai-chat-footer input:focus {
+  border-color: var(--primary-color);
+}
+
+.btn-send {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 15px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
   header {

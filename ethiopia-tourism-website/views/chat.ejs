@@ -1,0 +1,17 @@
+<div id="ai-chat-widget" class="ai-chat-collapsed">
+  <div class="ai-chat-header" onclick="toggleChat()">
+    <span>🇪🇹 Ask Ethiopia AI</span>
+    <span id="chat-toggle-icon">▲</span>
+  </div>
+  <div class="ai-chat-body" id="ai-chat-body">
+    <div class="chat-message bot-message">
+      Selam! I'm your Ethiopian travel AI assistant. Ask me about Lalibela, food, culture, or anything else!
+    </div>
+  </div>
+  <div class="ai-chat-footer">
+    <input type="text" id="ai-chat-input" placeholder="Type a message..." onkeypress="handleKeyPress(event)">
+    <button onclick="sendMessage()" class="btn-send">Send</button>
+  </div>
+</div>
+
+<script src="/js/chat.js"></script>

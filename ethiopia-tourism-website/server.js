@@ -1,9 +1,13 @@
+require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
 const bcrypt = require('bcrypt');
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
+const { GoogleGenAI } = require('@google/genai');
+
 const app = express();
+const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 const port = 3000;
 
 // Connect to SQLite DB and initialize tables if they don't exist
@@ -78,6 +82,28 @@ app.get('/place/:id', (req, res) => {
 
 // Serve other static HTML-converted-to-EJS pages directly for now
 app.get('/destinations', (req, res) => res.render('destinations'));
+
+// ----------------------------------------------------
+// AI Chatbot API Route
+// ----------------------------------------------------
+app.post('/api/chat', async (req, res) => {
+    const userMessage = req.body.message || "";
+
+    try {
+        const response = await ai.models.generateContent({
+            model: 'gemini-2.5-flash',
+            contents: userMessage,
+            config: {
+                systemInstruction: "You are an enthusiastic Ethiopian Tourism Expert. You provide concise, engaging, and accurate answers about Ethiopian tourism, including places like Lalibela, Simien Mountains, Entoto Park, Ethiopian food, culture, history, and travel tips. Keep your answers relatively short and helpful for a web chat widget. You use words like 'Selam!' for greetings.",
+            }
+        });
+
+        res.json({ response: response.text });
+    } catch (error) {
+        console.error("Gemini API Error:", error);
+        res.json({ response: "I'm sorry, I'm having trouble connecting to my knowledge base right now. Please try again later!" });
+    }
+});
 app.get('/culture', (req, res) => res.render('culture'));
 app.get('/guide', (req, res) => res.render('guide'));
 app.get('/gallery', (req, res) => res.render('gallery'));

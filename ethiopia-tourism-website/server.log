@@ -1,2 +1,11 @@
-Server listening at http://localhost:3000
+[dotenv@17.3.1] injecting env (1) from .env -- tip: ⚙️  enable debug logging with { debug: true }
+Server listening on port 3000
 Connected to the tourism SQLite database.
+Gemini API Error: ApiError: {"error":{"code":503,"message":"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.","status":"UNAVAILABLE"}}
+    at throwErrorIfNotOK (/app/ethiopia-tourism-website/node_modules/@google/genai/dist/node/index.cjs:13085:30)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async /app/ethiopia-tourism-website/node_modules/@google/genai/dist/node/index.cjs:12788:13
+    at async Models.generateContent (/app/ethiopia-tourism-website/node_modules/@google/genai/dist/node/index.cjs:14189:24)
+    at async /app/ethiopia-tourism-website/server.js:93:26 {
+  status: 503
+}
