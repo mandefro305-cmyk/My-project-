@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Visit Ethiopia</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<header>
+<div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; width: 100%;">
+    <h1 data-en="Visit Ethiopia" data-am="ኢትዮጵያን ጎብኙ">Visit Ethiopia</h1>
+
+    <nav>
+    <a href="/">Home</a>
+    <a href="/destinations">Destinations</a>
+    <a href="/culture">Culture</a>
+    <a href="/guide">Travel Guide</a>
+    <a href="/gallery">Gallery</a>
+    <a href="/blog">Blog</a>
+    <a href="/contact">Contact</a>
+    </nav>
+
+    <select id="language" onchange="changeLanguage()">
+    <option value="en">English</option>
+    <option value="am">አማርኛ</option>
+    </select>
+</div>
+</header>
+
+<section class="hero">
+<div class="container">
+    <h2 data-en="Discover the Beauty of Ethiopia" data-am="የኢትዮጵያን ውበት ያግኙ">Discover the Beauty of Ethiopia</h2>
+    <p data-en="Explore history, mountains and culture." data-am="ታሪክ፣ ተራሮች እና ባህልን ያስሱ">Explore history, mountains and culture.</p>
+</div>
+</section>
+
+<section class="places-grid container">
+<h2 data-en="Top Destinations" data-am="ከፍተኛ መዳረሻዎች">Top Destinations</h2>
+<div class="grid-container">
+    <% if(locals.places && places.length > 0) { %>
+        <% places.forEach(place => { %>
+            <div class="card">
+                <!-- If you add image files to public/img, uncomment: <img src="/img/<%= place.image_url %>" alt="<%= place.name %>" class="place-img"> -->
+                <h3><%= place.name %></h3>
+                <p><%= place.description %></p>
+                <a href="/place/<%= place.id %>" class="btn-read-more" data-en="Read More" data-am="ተጨማሪ ያንብቡ">Read More</a>
+            </div>
+        <% }) %>
+    <% } else { %>
+        <p>No places added yet. Check back soon!</p>
+    <% } %>
+</div>
+</section>
+
+<footer>
+<p>© 2026 Visit Ethiopia</p>
+</footer>
+
+<script src="js/language.js"></script>
+
+  <%- include("chat") %>
+</body>
+</html>
