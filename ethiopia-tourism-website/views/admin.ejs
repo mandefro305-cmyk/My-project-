@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Visit Ethiopia</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        body { background-color: #f4f7f6; }
+        .admin-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+            color: white;
+            padding: 30px;
+            border-radius: 8px 8px 0 0;
+            margin: -2rem -2rem 2rem -2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .admin-container {
+            margin: 50px auto;
+            padding: 2rem;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            max-width: 1000px;
+        }
+        .table-wrapper {
+            overflow-x: auto;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-radius: 8px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            white-space: nowrap;
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        th {
+            background-color: #f8faf9;
+            color: var(--text-dark);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+        tbody tr:hover { background-color: #f1f5f9; }
+        .form-card {
+            background: #f8faf9;
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: .5rem;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: .75rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-family: inherit;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            box-sizing: border-box;
+        }
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(0, 77, 64, 0.1);
+        }
+        .header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .admin-title { margin: 0; font-size: 2rem; }
+        .section-title {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            display: inline-block;
+            padding-bottom: 5px;
+            margin-bottom: 1.5rem;
+        }
+        .truncate {
+            max-width: 200px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container container">
+        <div class="admin-header header-flex">
+            <h2 class="admin-title">Admin Dashboard</h2>
+            <a href="/logout" class="btn btn-danger" style="box-shadow: none; background: rgba(255,255,255,0.2);">Logout</a>
+        </div>
+
+        <h3 class="section-title">Manage Tourist Places</h3>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Media</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if(places.length === 0) { %>
+                        <tr><td colspan="5" style="text-align: center; color: #64748b;">No places added yet.</td></tr>
+                    <% } %>
+                    <% places.forEach(place => { %>
+                    <tr>
+                        <td style="font-weight: bold; color: var(--primary-color);">#<%= place.id %></td>
+                        <td style="font-weight: 500;"><%= place.name %></td>
+                        <td class="truncate" title="<%= place.description %>"><%= place.description %></td>
+                        <td>
+                            <% if(place.image_url) { %><span style="background: #e2e8f0; padding: 2px 6px; border-radius: 4px; font-size: 0.8rem;">IMG</span><% } %>
+                            <% if(place.video_url) { %><span style="background: #e2e8f0; padding: 2px 6px; border-radius: 4px; font-size: 0.8rem;">VID</span><% } %>
+                        </td>
+                        <td>
+                            <form action="/admin/delete/<%= place.id %>" method="POST" style="display:inline;">
+                                <button type="submit" class="btn btn-danger" style="padding: 6px 12px; font-size: 0.85rem;" onclick="return confirm('Are you sure you want to permanently delete this place?')">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+
+        <h3 class="section-title">Add New Place</h3>
+        <div class="form-card">
+            <form action="/admin/add" method="POST">
+                <div class="form-group">
+                    <label>Place Name</label>
+                    <input type="text" name="name" placeholder="e.g., Lalibela Churches" required>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea name="description" rows="4" placeholder="Describe the history and beauty of this destination..." required></textarea>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div class="form-group">
+                        <label>Image File Name (Optional)</label>
+                        <input type="text" name="image_url" placeholder="e.g., lalibela.jpg">
+                    </div>
+                    <div class="form-group">
+                        <label>YouTube Embed URL (Optional)</label>
+                        <input type="url" name="video_url" placeholder="e.g., https://www.youtube.com/embed/...">
+                    </div>
+                </div>
+                <button type="submit" class="btn" style="width: 100%; margin-top: 10px;">+ Add Tourist Destination</button>
+            </form>
+        </div>
+
+    </div>
+</body>
+</html>
