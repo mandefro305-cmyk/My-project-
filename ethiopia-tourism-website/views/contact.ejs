@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Contact</title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<header>
+<div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; width: 100%;">
+    <h1 data-en="Visit Ethiopia" data-am="ኢትዮጵያን ጎብኙ">Visit Ethiopia</h1>
+
+    <nav>
+    <a href="/">Home</a>
+    <a href="/destinations">Destinations</a>
+    <a href="/culture">Culture</a>
+    <a href="/guide">Travel Guide</a>
+    <a href="/gallery">Gallery</a>
+    <a href="/blog">Blog</a>
+    <a href="/contact">Contact</a>
+    </nav>
+
+    <select id="language" onchange="changeLanguage()">
+    <option value="en">English</option>
+    <option value="am">አማርኛ</option>
+    </select>
+</div>
+</header>
+
+<section class="container" style="padding: 40px 20px;">
+
+<form>
+<input type="text" placeholder="Your Name"><br>
+<input type="email" placeholder="Your Email"><br>
+<textarea placeholder="Message"></textarea><br>
+<button>Send</button>
+</form>
+
+</section>
+
+  <%- include("chat") %>
+</body>
+</html>
