@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Destinations</title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<header>
+<div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; width: 100%;">
+    <h1 data-en="Visit Ethiopia" data-am="ኢትዮጵያን ጎብኙ">Visit Ethiopia</h1>
+
+    <nav>
+    <a href="/">Home</a>
+    <a href="/destinations">Destinations</a>
+    <a href="/culture">Culture</a>
+    <a href="/guide">Travel Guide</a>
+    <a href="/gallery">Gallery</a>
+    <a href="/blog">Blog</a>
+    <a href="/contact">Contact</a>
+    </nav>
+
+    <select id="language" onchange="changeLanguage()">
+    <option value="en">English</option>
+    <option value="am">አማርኛ</option>
+    </select>
+</div>
+</header>
+
+<section class="container" style="padding: 40px 20px;">
+
+<h2>Lalibela</h2>
+<p>Historic rock churches and UNESCO heritage site.</p>
+
+<h2>Simien Mountains</h2>
+<p>Great hiking, wildlife and landscapes.</p>
+
+<h2>Lake Tana</h2>
+<p>The largest lake in Ethiopia and source of the Blue Nile.</p>
+
+<h2>Entoto Park</h2>
+<p>Beautiful recreation park overlooking Addis Ababa.</p>
+
+</section>
+
+  <%- include("chat") %>
+</body>
+</html>
