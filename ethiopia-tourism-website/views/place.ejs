@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title><%= place.name %> - Visit Ethiopia</title>
+<link rel="stylesheet" href="/css/style.css">
+<style>
+    .place-detail {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 20px;
+        background: white;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        border-radius: 8px;
+    }
+    .video-container {
+        position: relative;
+        padding-bottom: 56.25%; /* 16:9 aspect ratio */
+        height: 0;
+        overflow: hidden;
+        margin-top: 20px;
+    }
+    .video-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+    .back-btn {
+        display: inline-block;
+        margin-bottom: 20px;
+        color: #004d40;
+        text-decoration: none;
+        font-weight: bold;
+    }
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; width: 100%;">
+    <h1 data-en="Visit Ethiopia" data-am="ኢትዮጵያን ጎብኙ">Visit Ethiopia</h1>
+
+    <nav>
+    <a href="/">Home</a>
+    <a href="/destinations">Destinations</a>
+    <a href="/culture">Culture</a>
+    <a href="/guide">Travel Guide</a>
+    <a href="/gallery">Gallery</a>
+    <a href="/blog">Blog</a>
+    <a href="/contact">Contact</a>
+    </nav>
+
+    <select id="language" onchange="changeLanguage()">
+    <option value="en">English</option>
+    <option value="am">አማርኛ</option>
+    </select>
+</div>
+</header>
+
+<div class="place-detail">
+    <a href="/" class="back-btn">&larr; Back to Destinations</a>
+    <h2><%= place.name %></h2>
+    <p><%= place.description %></p>
+
+    <% if(place.video_url) { %>
+        <div class="video-container">
+            <iframe src="<%= place.video_url %>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    <% } %>
+</div>
+
+<footer>
+<p>© 2026 Visit Ethiopia</p>
+</footer>
+
+<script src="/js/language.js"></script>
+  <%- include("chat") %>
+</body>
+</html>
