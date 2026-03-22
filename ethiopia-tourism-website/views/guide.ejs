@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Travel Guide</title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<header>
+<div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; width: 100%;">
+    <h1 data-en="Visit Ethiopia" data-am="ኢትዮጵያን ጎብኙ">Visit Ethiopia</h1>
+
+    <nav>
+    <a href="/">Home</a>
+    <a href="/destinations">Destinations</a>
+    <a href="/culture">Culture</a>
+    <a href="/guide">Travel Guide</a>
+    <a href="/gallery">Gallery</a>
+    <a href="/blog">Blog</a>
+    <a href="/contact">Contact</a>
+    </nav>
+
+    <select id="language" onchange="changeLanguage()">
+    <option value="en">English</option>
+    <option value="am">አማርኛ</option>
+    </select>
+</div>
+</header>
+
+<section class="container" style="padding: 40px 20px;">
+
+<h2>Transportation</h2>
+<p>Visitors can travel by plane, bus or car.</p>
+
+<h2>Best Time to Visit</h2>
+<p>October to March has comfortable weather.</p>
+
+<h2>Accommodation</h2>
+<p>Hotels, lodges and guest houses are available.</p>
+
+</section>
+
+  <%- include("chat") %>
+</body>
+</html>
